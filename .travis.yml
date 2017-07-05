@@ -2,6 +2,7 @@ language: python
 python:
   - "2.7"
   - "3.6"
+
 env:
   matrix:
     - TOX_ENV=py27-django18-pg
@@ -12,6 +13,11 @@ env:
 # Enable PostgreSQL usage
 addons:
   postgresql: "9.3"
+
+before_install:
+  - echo $TOX_ENV
+  - echo (echo py$TRAVIS_PYTHON_VERSION | tr -d .)
+  - please_stop_now
 
 # Dependencies
 install:
@@ -27,11 +33,6 @@ before_script:
 
 # Run tests
 script:
-  - $TOX_ENV
-  - py$TRAVIS_PYTHON_VERSION
-  - echo $TOX_ENV
-  - echo py$TRAVIS_PYTHON_VERSION
-  - (echo py$TRAVIS_PYTHON_VERSION | tr -d .)
   - tox -e $TOX_ENV
 
 # Run coveralls
