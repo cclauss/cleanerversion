@@ -27,9 +27,11 @@ before_script:
 
 # Run tests
 script:
-  echo py$TRAVIS_PYTHON_VERSION
-  echo py$TRAVIS_PYTHON_VERSION | tr -d .
+  $TOX_ENV
+  py$TRAVIS_PYTHON_VERSION
   echo $TOX_ENV
+  echo py$TRAVIS_PYTHON_VERSION
+  (echo py$TRAVIS_PYTHON_VERSION | tr -d .)
   tox -e $TOX_ENV
 
 # Run coveralls
